@@ -6,9 +6,13 @@ const printToDom = (domString, divId) => {
 
 const buildDomString = planetsArray => {
     let domString = "";
-    for (let i = 0; i < planetsArray.length; i++) {
-        domString += `<h1>${planetsArray[i].name}</h1>`;
-    }
+    planetsArray.forEach((planets) => { 
+        domString += `<div class ="card">`;
+        domString += `<h1>${planets.name}</h1>`;
+        domString += `<img class="image" src="${planets.imageUrl}" alt="">`;
+        // domString += `<p class="text">${planets.description}</p>`;
+        domString += `</div>`;
+    });
     printToDom(domString, 'planet-holder');
 };
 

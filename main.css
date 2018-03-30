@@ -1,0 +1,25 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: black;
+}
+
+#planet-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+.card {
+    color: white;
+    margin: 1%;
+    padding: 2%;
+    width: 25%;
+    border: 2px solid slategrey;
+    background-color: skyblue;
+    text-align: center;
+}
+
+.image {
+    width: 85%;
+    height: 85%;
+    margin: 0 auto;
+}
