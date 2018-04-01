@@ -2,42 +2,66 @@
     "planets": [{
         "name": "Mercury",
         "imageUrl": "https://apod.nasa.gov/apod/image/1303/PIA16853mercury.jpg",
-        "description": "Mercury is the smallest planet in our solar system - only slightly larger than the Earth's moon. If the sun were as tall as a typical front door, Earth would be the size of a nickel and Mercury would be about as big as a green pea."
+        "description": "Mercury is the smallest planet in our solar system - only slightly larger than the Earth's moon. If the sun were as tall as a typical front door, Earth would be the size of a nickel and Mercury would be about as big as a green pea.",
+        "isGasPlanet": false,
+        "numberOfMoons": 0,
+        "nameOfLargestMoon": "Mercury does not have a moon"
     },
     {
         "name": "Venus",
         "imageUrl": "http://www.astronomy.com/-/media/Images/News%20and%20Observing/News/2018/02/PIA00270_hires.jpg",
-        "description": "If the sun were as tall as a typical front door, the Earth and Venus would each be about the size of a nickel."
+        "description": "If the sun were as tall as a typical front door, the Earth and Venus would each be about the size of a nickel.",
+        "isGasPlanet": false,
+        "numberOfMoons": 0,
+        "nameOfLargestMoon": "Venus does not have a moon" 
     },
     {
         "name": "Jupiter",
         "imageUrl": "https://www.nasa.gov/sites/default/files/jupiter_1_0.jpg",
-        "description": "The biggest planet in our solar system, Jupiter also has a large presence in pop culture, including many movies, TV shows, video games and comics. Jupiter was a notable destination in the Wachowski siblings’ science fiction spectacle Jupiter Ascending, while various Jovian moons provide settings for Cloud Atlas, Futurama, Power Rangers, and Halo, among many others. In Men in Black when Agent J—played by Will Smith—mentions he thought one of his childhood teachers was from Venus, Agent K—played by Tommy Lee Jones—replies that she is actually from one of Jupiter’s moons."
+        "description": "The biggest planet in our solar system, Jupiter also has a large presence in pop culture, including many movies, TV shows, video games and comics. Jupiter was a notable destination in the Wachowski siblings’ science fiction spectacle Jupiter Ascending, while various Jovian moons provide settings for Cloud Atlas, Futurama, Power Rangers, and Halo, among many others. In Men in Black when Agent J—played by Will Smith—mentions he thought one of his childhood teachers was from Venus, Agent K—played by Tommy Lee Jones—replies that she is actually from one of Jupiter’s moons.",
+        "isGasPlanet": true,
+        "numberOfMoons": 67,
+        "nameOfLargestMoon": "Ganymede"
     },
     {
         "name": "Mars",
         "imageUrl": "https://space-facts.com/wp-content/uploads/mars.jpg",
-        "description": "Mars is a dynamic world that additionally has seasons, polar ice caps, volcanoes, canyons and weather. Mars’ similarities to Earth—and stark differences—make it a prime target for exploration. An international science fleet keeps constant watch on this world and two robotic rovers are operating on the surface—sending back a steady stream of science data and images."
+        "description": "Mars is a dynamic world that additionally has seasons, polar ice caps, volcanoes, canyons and weather. Mars’ similarities to Earth—and stark differences—make it a prime target for exploration. An international science fleet keeps constant watch on this world and two robotic rovers are operating on the surface—sending back a steady stream of science data and images.",
+        "isGasPlanet": false,
+        "numberOfMoons": 2,
+        "nameOfLargestMoon": "Phobos"
     },
     {
         "name": "Earth",
         "imageUrl": "https://boygeniusreport.files.wordpress.com/2017/04/earth.jpg",
-        "description": "Earth is the third planet from the Sun and the fifth largest in the solar system. Just slightly larger than nearby Venus, Earth is the biggest of the terrestrial planets. Our home planet is the only planet in our solar system known to harbor living things. The name Earth is at least 1,000 years old. All of the planets, except for Earth, were named after Greek and Roman gods and goddesses. However, the name Earth is an English/German word, which simply means the ground."
+        "description": "Earth is the third planet from the Sun and the fifth largest in the solar system. Just slightly larger than nearby Venus, Earth is the biggest of the terrestrial planets. Our home planet is the only planet in our solar system known to harbor living things. The name Earth is at least 1,000 years old. All of the planets, except for Earth, were named after Greek and Roman gods and goddesses. However, the name Earth is an English/German word, which simply means the ground.",
+        "isGasPlanet": false,
+        "numberOfMoons": 1,
+        "nameOfLargestMoon": "Luna"
     },
     {
         "name": "Saturn",
         "imageUrl": "https://nssdc.gsfc.nasa.gov/planetary/image/saturn.jpg",
-        "description": "Saturn is the sixth planet from the sun and the second largest planet in our solar system. Adorned with thousands of beautiful ringlets, Saturn is unique among the planets. It is not the only planet to have rings—made of chunks of ice and rock—but none are as spectacular or as complicated as Saturn's. Like fellow gas giant Jupiter, Saturn is a massive ball made mostly of hydrogen and helium."
+        "description": "Saturn is the sixth planet from the sun and the second largest planet in our solar system. Adorned with thousands of beautiful ringlets, Saturn is unique among the planets. It is not the only planet to have rings—made of chunks of ice and rock—but none are as spectacular or as complicated as Saturn's. Like fellow gas giant Jupiter, Saturn is a massive ball made mostly of hydrogen and helium.",
+        "isGasPlanet": true,
+        "numberOfMoons": 62,
+        "nameOfLargestMoon": "Titan" 
     },
     {
         "name": "Uranus",
         "imageUrl": "https://solarsystem.nasa.gov/system/feature_items/images/89_uranus_carousel_1.jpg",
-        "description": "The seventh planet from the sun with the third largest diameter in our solar system, Uranus is very cold and windy. The ice giant is surrounded by 13 faint rings and 27 small moons as it rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side, orbiting the sun like a rolling ball."
+        "description": "The seventh planet from the sun with the third largest diameter in our solar system, Uranus is very cold and windy. The ice giant is surrounded by 13 faint rings and 27 small moons as it rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side, orbiting the sun like a rolling ball.",
+        "isGasPlanet": true,
+        "numberOfMoons": 27,
+        "nameOfLargestMoon": "Arial"
     },
     {
         "name": "Neptune",
         "imageUrl": "https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Space/H-P/neptune-planet.adapt.945.1.jpg",
-        "description": "Dark, cold and whipped by supersonic winds, ice giant Neptune is the eighth and most distant planet in our solar system. More than 30 times as far from the Sun as Earth, Neptune is the only planet in our solar system not visible to the naked eye. In 2011 Neptune completed its first 165-year orbit since its discovery in 1846."
+        "description": "Dark, cold and whipped by supersonic winds, ice giant Neptune is the eighth and most distant planet in our solar system. More than 30 times as far from the Sun as Earth, Neptune is the only planet in our solar system not visible to the naked eye. In 2011 Neptune completed its first 165-year orbit since its discovery in 1846.",
+        "isGasPlanet": true,
+        "numberOfMoons": 14,
+        "nameOfLargestMoon": "Triton"
     }
     ]}
 
