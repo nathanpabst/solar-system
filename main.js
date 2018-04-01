@@ -1,4 +1,9 @@
 // console.log('Oh, hey');
+// When the user clicks on a planet card all the cards dissapear and the only thing displayed on the page is information about the planet they clicked on. 
+
+// When the user clicks on the red X on a single planet that information goes away and all the original cards are displayed again.
+
+// When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
 
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
@@ -14,9 +19,8 @@ const planetCard = (planetsArray) => {
     });
     printToDom(domString, 'planet-holder');
 };
-// When the user moves their mouse over a planet card the name should dissapear and the image of the planet should take up the whole card.
-// expand image, hide name, hide description 
 
+// BUILD ENLARGED PLANET CARDS
 const planetCard2 = (planet) => {
     let expandedCard = "";
     domString2 += `<div class="exp-card">`;
@@ -41,41 +45,31 @@ const planetCard2 = (planet) => {
     printToDom(domString2, 'planet-holder');
 };
 
-// When the user clicks on a planet card all the cards dissapear and the only thing displayed on the page is information about the planet they clicked on. 
+ const clickPlanet = (e) => {
+     let 
+ }
 
+// ON MOUSE-ENTER, SHOW PLANET IMAGE 
+const previewPlanet = (e) => {
+    e.target.children[1].classList.remove('hidden');
+    e.target.children[0].classList.add('hidden');
+};
+// ON MOUSE-OUT, HIDE PLANET IMAGE
+const exitPreview = (e) => {
+    e.target.children[0].classList.remove('hidden');
+    e.target.children[1].classList.add('add');
+};
+// ADD EVENTLISTENERS FOR MOUSE & CLICK EVENTS
+const addEventListeners = () => {
+    let planets = document.getElementsByClassName('original-card');
+    for(let i = 0; i <planets.length; i++){
+      planets[i].addEventListener('mouseenter', previewPlanet);
+      planets[i].addEventListener('mouseout', exitPreview);
+      planets[i].addEventListener('click', clickPlanet); 
+    }
+  };
 
-// const activatePlanetImage = () => {
-//     const planetImage = document.getElementsByClassName('image');
-//     for(let i = 0; i <planetImage.length; i++){
-//       planetImage[i].addEventListener('mouseover', buildDomString);
-//       document.getElementsByClassName("text").style.display = "none";
-//       document.getElementsByClassName("planet-name").style.display = "none"; 
-    
-//     }
-//   };
-
-
-
-
-
-// const activatePlanetDescription = () => {
-//     const planetDescription = document.getElementsByClassName('card');
-//     for(let j = 0; j < planetDescription.length; i++){
-//       planetDescription[j].addEventListener('click', );
-//         domString += `<div class ="card">`;
-//         domString += `<p class="text">${planets.description}</p>`;
-//         domString += `</div>`;
-
-// }
-
-
-
-// When the user clicks on the red X on a single planet that information goes away and all the original cards are displayed again.
-
-// When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
-
-// Create an XHR request that loads planets.json and displays them as cards with the planet name centered 
-
+// XHR REQUEST TO LOAD DATA FROM planets.json & START APPLICATION
 function executeThisCodeIfXHRFails() {
     console.log('something went wrong');
 }
