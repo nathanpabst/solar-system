@@ -1,6 +1,11 @@
 body {
     font-family: 'Courier New', Courier, monospace;
     background-color: black;
+    color: white;
+}
+h1 {
+    font-size: 3em;
+    text-align: center;
 }
 
 #planet-holder {
@@ -8,7 +13,7 @@ body {
     flex-wrap: wrap;
     justify-content: center; 
 }
-.card {
+.original-card {
     color: white;
     margin: 1%;
     padding: 2%;
@@ -17,9 +22,24 @@ body {
     background-color: skyblue;
     text-align: center;
 }
+.exp-card {
 
+}
+.exp-name {
+
+}
+.exp-img {
+
+}
+#close {
+
+}
 .image {
     width: 85%;
     height: 85%;
     margin: 0 auto;
 }
+
+.hidden {
+    display: none;
+} 
