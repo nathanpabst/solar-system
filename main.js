@@ -46,8 +46,8 @@ const planetCard2 = (planet) => {
 };
 
  const clickPlanet = (e) => {
-     let 
- }
+     let... 
+ };
 
 // ON MOUSE-ENTER, SHOW PLANET IMAGE 
 const previewPlanet = (e) => {
