@@ -13,8 +13,8 @@ const planetCard = (planetsArray) => {
     let domString = "";
     planetsArray.forEach((planets) => { 
         domString += `<div class ="original-card">`;
-        domString += `<h2 class="planet-name">${planets.name}</h2>`;
-        domString += `<img class="hidden" src="${planets.imageUrl}" alt="">`;
+        domString +=    `<h2 class="planet-name">${planets.name}</h2>`;
+        domString +=    `<img class="hidden" src="${planets.imageUrl}" alt="">`;
         domString += `</div>`;
     });
     printToDom(domString, 'planet-holder');
@@ -40,13 +40,13 @@ const planetCard2 = (planet) => {
     } else {
         domString2 +=   `<h4>${planets.name} is a gas planet.</h4>`;
     }
-    domString2 += `<p>${planets.description}</p>`;
+    domString2 +=   `<p>${planets.description}</p>`;
     domString2 += `</div>`;
-    printToDom(domString2, 'planet-holder');
+    printToDom(domString2, 'exp-card');
 };
 
  const clickPlanet = (e) => {
-     let... 
+    //  let... 
  };
 
 // ON MOUSE-ENTER, SHOW PLANET IMAGE 
@@ -84,7 +84,7 @@ const startApplication = () => {
     let myRequest = new XMLHttpRequest();
     myRequest.addEventListener("load", executeThisCodeAfterFileLoaded);
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
-    myRequest.open("GET", "planets.json");
+    myRequest.open("GET", "/planets.json");
     myRequest.send();
 };
 
