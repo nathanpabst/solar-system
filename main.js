@@ -60,7 +60,7 @@ const planetCard = (planetsArray) => {
 const clickPlanet = (e) => {
  names = document.getElementsByClassName('original-card');
     for (var j = 0; j < names.length; j++){
-        names[i].addEventListener('click', planetCard2);
+        names[j].addEventListener('click', planetCard2);
     }
     e.target.children[1].classList.remove('original-card');
     e.target.children[0].classList.add('exp-card');
