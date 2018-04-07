@@ -33,8 +33,9 @@ const planetCard = (planetsArray) => {
 
 // BUILD ENLARGED PLANET CARDS
     const planetCard2 = (planet) => {
-        let expandedCard = "";
-        domString2 += `<div class="exp-card">`;
+        // console.log(planet);
+        let domString2 = "";
+        domString2 += `<div id="big-card" class="exp-card">`;
         domString2 +=   `<button id="close">X</button>`;
         domString2 +=   `<h2 class="exp-name">${planet.name}</h2>`;
         domString2 +=   `<img class="exp-img" src="${planet.imageUrl}" alt="">`;
@@ -54,16 +55,16 @@ const planetCard = (planetsArray) => {
         domString2 +=   `<p>${planet.description}</p>`;
         domString2 += `</div>`;
         printToDom(domString2, 'big-card');
-        previewPlanet();
+        // previewPlanet();
 };
 
-const clickPlanet = (e) => {
+const clickPlanet = () => {
  names = document.getElementsByClassName('original-card');
     for (var j = 0; j < names.length; j++){
-        names[j].addEventListener('click', planetCard2);
+        names[j].addEventListener('click', newApplication);
     }
-    e.target.children[1].classList.remove('original-card');
-    e.target.children[0].classList.add('exp-card');
+    // e.target.children[1].classList.remove('original-card');
+    // e.target.children[0].classList.add('exp-card');
 };
 
 // ON MOUSE-ENTER, SHOW PLANET IMAGE 
