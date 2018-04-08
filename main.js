@@ -30,8 +30,8 @@ const planetCard = (planetsArray) => {
     addEventListeners();
 };
 
-// BUILD ENLARGED PLANET CARDS
-    const planetCard2 = () => {
+// BUILD PLANET CARD
+    const planetCard2 = (planet) => {
         let domString2 = "";
         domString2 += `<div class="exp-card">`;
         domString2 +=   `<button id="close">X</button>`;
@@ -54,11 +54,12 @@ const planetCard = (planetsArray) => {
         domString2 += `</div>`;
         printToDom(domString2, 'big-card');
 };
-
+// trying to determine which planet is being clicked here
 const clickPlanet = () => {
  names = document.getElementsByClassName('original-card');
     for (var j = 0; j < names.length; j++){
         names[j].addEventListener('click', newApplication);
+        console.log(names[j]);
     }
 };
 
@@ -77,21 +78,17 @@ const addEventListeners = () => {
   };
 }  
 
-// Parse data for big card and determine which planet is clicked
-function determinePlanet(input){
+function executeThisCodeForBigCard(){
     const data = JSON.parse(this.responseText);
-    for(k = 0; k < data.planets.length; k++){
-        if (data.planets[k].name === input){
-            planetCard2(data.planets[k]);
-        }
-    }  
-}
+    planetCard2(data.planets);
+}  
 
 // XHR call for big card
 const newApplication = (e) => {
-    console.log(e);
     let myRequest = new XMLHttpRequest();
-    myRequest.addEventListener("load", determinePlanet);
+    myRequest.addEventListener("load", executeThisCodeForBigCard);
+    console.log(e);
+
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
     myRequest.open("GET", "./planets.json");
     myRequest.send();
