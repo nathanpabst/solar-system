@@ -12,7 +12,6 @@
 //     domString +=    `<button class="btn btn-default" type="button">Go!</button>`;
 //     domString +=    `</span>`;
 //     domString +=    `</div>`;
-names = ["Mercury", "Venus", "Jupiter", "Mars", "Earth", "Saturn", "Uranus", "Neptune"];
 
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
@@ -32,13 +31,12 @@ const planetCard = (planetsArray) => {
 };
 
 // BUILD ENLARGED PLANET CARDS
-    const planetCard2 = (planet) => {
-        // console.log(planet);
+    const planetCard2 = () => {
         let domString2 = "";
-        domString2 += `<div id="big-card" class="exp-card">`;
+        domString2 += `<div class="exp-card">`;
         domString2 +=   `<button id="close">X</button>`;
         domString2 +=   `<h2 class="exp-name">${planet.name}</h2>`;
-        domString2 +=   `<img class="exp-img" src="${planet.imageUrl}" alt="">`;
+        domString2 +=   `<img class="exp-img" src="${planet.imageUrl}" alt="planet-image">`;
         if(planet.numberOfMoons === 0){
             domString2 +=   `<h4>${planet.name} does not have any moons.</h4>`;
         } else if (planet.numberOfMoons === 1){
@@ -55,7 +53,6 @@ const planetCard = (planetsArray) => {
         domString2 +=   `<p>${planet.description}</p>`;
         domString2 += `</div>`;
         printToDom(domString2, 'big-card');
-        // previewPlanet();
 };
 
 const clickPlanet = () => {
@@ -63,8 +60,6 @@ const clickPlanet = () => {
     for (var j = 0; j < names.length; j++){
         names[j].addEventListener('click', newApplication);
     }
-    // e.target.children[1].classList.remove('original-card');
-    // e.target.children[0].classList.add('exp-card');
 };
 
 // ON MOUSE-ENTER, SHOW PLANET IMAGE 
@@ -79,21 +74,24 @@ const addEventListeners = () => {
     let planets = document.getElementsByClassName('original-card');
     for(let i = 0; i <planets.length; i++){
       planets[i].addEventListener('mouseenter', previewPlanet);
-    //   can i use this same class or do i need to create a new class/id for the big card?
-    //   planets[i].addEventListener('click', clickPlanet);
   };
 }  
 
-// Parse data for big card
-function executeThisCodeForBigCard(){
+// Parse data for big card and determine which planet is clicked
+function determinePlanet(input){
     const data = JSON.parse(this.responseText);
-    planetCard2(data.planets);
+    for(k = 0; k < data.planets.length; k++){
+        if (data.planets[k].name === input){
+            planetCard2(data.planets[k]);
+        }
+    }  
 }
 
 // XHR call for big card
-const newApplication = () => {
+const newApplication = (e) => {
+    console.log(e);
     let myRequest = new XMLHttpRequest();
-    myRequest.addEventListener("load", executeThisCodeForBigCard);
+    myRequest.addEventListener("load", determinePlanet);
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
     myRequest.open("GET", "./planets.json");
     myRequest.send();
