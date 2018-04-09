@@ -54,13 +54,16 @@ const planetCard = (planetsArray) => {
         domString2 += `</div>`;
         printToDom(domString2, 'big-card');
 };
-// trying to determine which planet is being clicked here
+// determine which planet is clicked
 const clickPlanet = () => {
- names = document.getElementsByClassName('original-card');
-    for (var j = 0; j < names.length; j++){
-        names[j].addEventListener('click', newApplication);
-        console.log(names[j]);
-    }
+ let whichPlanet = document.getElementsByClassName('original-card');
+    for (var j = 0; j < whichPlanet.length; j++){
+        whichPlanet[j].addEventListener('click', (e) => {
+            whichPlanet = e.target.parentNode.children[0];
+            // console.log(whichPlanet);
+            newApplication(whichPlanet);
+        });
+    };
 };
 
 // ON MOUSE-ENTER, SHOW PLANET IMAGE 
@@ -87,8 +90,6 @@ function executeThisCodeForBigCard(){
 const newApplication = (e) => {
     let myRequest = new XMLHttpRequest();
     myRequest.addEventListener("load", executeThisCodeForBigCard);
-    console.log(e);
-
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
     myRequest.open("GET", "./planets.json");
     myRequest.send();
