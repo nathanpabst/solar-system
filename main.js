@@ -2,6 +2,7 @@
 // When the user clicks on a planet card all the cards dissapear and the only thing displayed on the page is information about the planet they clicked on. 
 
 // When the user clicks on the red X on a single planet that information goes away and all the original cards are displayed again.
+//   document.getElementById('close').addEventListener('click', startApplication);
 
 // When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
 // SEARCH BAR
@@ -12,13 +13,19 @@
 //     domString +=    `<button class="btn btn-default" type="button">Go!</button>`;
 //     domString +=    `</span>`;
 //     domString +=    `</div>`;
+// GATHER INPUT FROM SEARCH BAR
+// const getUserInput = e.target.....value;
+// CLEAR SEARCH BAR
+// const clearSearchBox = (input) => {
+//     input.value = "";
+// }
 
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 };
 
 // BUILD INITIAL PLANET CARDS 
-const planetCard = (planetsArray) => {
+const buildPlanetCards = (planetsArray) => {
     let domString = "";
     planetsArray.forEach((planet) => { 
         domString += `<div class="original-card">`;
@@ -54,20 +61,31 @@ const planetCard = (planetsArray) => {
         domString2 += `</div>`;
         printToDom(domString2, 'big-card');
 };
-// trying to determine which planet is being clicked here
-const clickPlanet = () => {
- names = document.getElementsByClassName('original-card');
-    for (var j = 0; j < names.length; j++){
-        names[j].addEventListener('click', newApplication);
-        console.log(names[j]);
-    }
+
+const hidePlanetCards = (e) => { 
+    let planetsCollection = document.getElementsByClassName('original-card');
+// LOOP OVER PLANET CARDS AND HIDE
+    for (var j = 0; j < planetsCollection.length; j++) {
+            planetsCollection[j].classList.add('hidden'); 
+    };
+    newApplication(e.target.currentSrc);
+};  
+
+// DETERMINE WHICH PLANET IS CLICKED
+const clickPlanet = (e) => {
+    // 2. planets = Do GET to planets.json (XMLHttpRequest)
+    // newApplication(e.target.getAttribute('src'));
+    // console.log(e.target.getAttribute('src'));
+    // 1. Hide all planet dom element cards
+    hidePlanetCards(e);
+    // 3. planet = Figure out which planet the click came from?
+    // 4. planetCard2(planet)
 };
 
 // ON MOUSE-ENTER, SHOW PLANET IMAGE 
 const previewPlanet = (e) => {
     e.target.children[1].classList.remove('hidden');
-    e.target.children[0].classList.add('hidden');
-    clickPlanet(); 
+    e.target.children[0].classList.add('hidden'); 
 };
 
 // ADD EVENT-LISTENERS FOR MOUSE & CLICK EVENTS
@@ -75,28 +93,28 @@ const addEventListeners = () => {
     let planets = document.getElementsByClassName('original-card');
     for(let i = 0; i <planets.length; i++){
       planets[i].addEventListener('mouseenter', previewPlanet);
-  };
-}  
+      planets[i].addEventListener('click', clickPlanet);
+    };
+};  
 
-function executeThisCodeForBigCard(){
-    const data = JSON.parse(this.responseText);
-    planetCard2(data.planets);
-}  
-
-// XHR call for big card
-const newApplication = (e) => {
+// XHR CALL FOR BIG CARD
+const newApplication = (planetId) => {
     let myRequest = new XMLHttpRequest();
-    myRequest.addEventListener("load", executeThisCodeForBigCard);
-    console.log(e);
-
+    myRequest.addEventListener("load", function () {
+        const data = JSON.parse(this.responseText).planets;
+        for (let i = 0; i < data.length; i++)
+        if (data[i].imageUrl === planetId) {
+        planetCard2(data[i]);
+        }
+    });
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
     myRequest.open("GET", "./planets.json");
     myRequest.send();
-}
+};
 
 function executeThisCodeAfterFileLoaded() {
     const data = JSON.parse(this.responseText);
-    planetCard(data.planets);
+    buildPlanetCards(data.planets);
 }
 
 function executeThisCodeIfXHRFails() {
@@ -117,5 +135,3 @@ const startApplication = () => {
 };
 
 startApplication();
-
-
