@@ -73,13 +73,7 @@ const hidePlanetCards = (e) => {
 
 // DETERMINE WHICH PLANET IS CLICKED
 const clickPlanet = (e) => {
-    // 2. planets = Do GET to planets.json (XMLHttpRequest)
-    // newApplication(e.target.getAttribute('src'));
-    // console.log(e.target.getAttribute('src'));
-    // 1. Hide all planet dom element cards
     hidePlanetCards(e);
-    // 3. planet = Figure out which planet the click came from?
-    // 4. planetCard2(planet)
 };
 
 // ON MOUSE-ENTER, SHOW PLANET IMAGE 
