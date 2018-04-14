@@ -65,19 +65,19 @@ const buildPlanetCards = (planetsArray) => {
 const hidePlanetCards = (e) => { 
     let planetsCollection = document.getElementsByClassName('original-card');
 // LOOP OVER PLANET CARDS AND HIDE
-    for (var j = 0; j < data.planets.length; j++) {
-        if (data.planets[j] === e.target.parentNode.children[0]) {
-            data.planets[j].add('hidden'); 
-        };
-    };    
+    for (var j = 0; j < planetsCollection.length; j++) {
+            planetsCollection[j].classList.add('hidden'); 
+    };
+    newApplication(e.target.currentSrc);
 };  
 
 // DETERMINE WHICH PLANET IS CLICKED
 const clickPlanet = (e) => {
     // 2. planets = Do GET to planets.json (XMLHttpRequest)
-    newApplication(e.target.getAttribute('src'));
+    // newApplication(e.target.getAttribute('src'));
+    // console.log(e.target.getAttribute('src'));
     // 1. Hide all planet dom element cards
-    hidePlanetCards();
+    hidePlanetCards(e);
     // 3. planet = Figure out which planet the click came from?
     // 4. planetCard2(planet)
 };
@@ -97,18 +97,16 @@ const addEventListeners = () => {
     };
 };  
 
-// LOOP OVER DATA.PLANETS AND CALL PLANET2 
-function executeThisCodeForBigCard(planetId){
-    const data = JSON.parse(this.responseText);
-        if (${planets.imageUrl} === e.target.getAttribute('src')) {
-        planetCard2(planet);
-    }    
-}        
-
 // XHR CALL FOR BIG CARD
 const newApplication = (planetId) => {
     let myRequest = new XMLHttpRequest();
-    myRequest.addEventListener("load", executeThisCodeForBigCard(planetId));
+    myRequest.addEventListener("load", function () {
+        const data = JSON.parse(this.responseText).planets;
+        for (let i = 0; i < data.length; i++)
+        if (data[i].imageUrl === planetId) {
+        planetCard2(data[i]);
+        }
+    });
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
     myRequest.open("GET", "./planets.json");
     myRequest.send();
