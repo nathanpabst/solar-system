@@ -2,6 +2,7 @@
 // When the user clicks on a planet card all the cards dissapear and the only thing displayed on the page is information about the planet they clicked on. 
 
 // When the user clicks on the red X on a single planet that information goes away and all the original cards are displayed again.
+//   document.getElementById('close').addEventListener('click', startApplication);
 
 // When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
 // SEARCH BAR
@@ -12,13 +13,19 @@
 //     domString +=    `<button class="btn btn-default" type="button">Go!</button>`;
 //     domString +=    `</span>`;
 //     domString +=    `</div>`;
+// GATHER INPUT FROM SEARCH BAR
+// const getUserInput = e.target.....value;
+// CLEAR SEARCH BAR
+// const clearSearchBox = (input) => {
+//     input.value = "";
+// }
 
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 };
 
 // BUILD INITIAL PLANET CARDS 
-const planetCard = (planetsArray) => {
+const buildPlanetCards = (planetsArray) => {
     let domString = "";
     planetsArray.forEach((planet) => { 
         domString += `<div class="original-card">`;
@@ -54,23 +61,31 @@ const planetCard = (planetsArray) => {
         domString2 += `</div>`;
         printToDom(domString2, 'big-card');
 };
-// determine which planet is clicked
-const clickPlanet = () => {
- let whichPlanet = document.getElementsByClassName('original-card');
-    for (var j = 0; j < whichPlanet.length; j++){
-        whichPlanet[j].addEventListener('click', (e) => {
-            whichPlanet = e.target.parentNode.children[0];
-            // console.log(whichPlanet);
-            newApplication(whichPlanet);
-        });
-    };
+
+const hidePlanetCards = (e) => { 
+    let planetsCollection = document.getElementsByClassName('original-card');
+// LOOP OVER PLANET CARDS AND HIDE
+    for (var j = 0; j < data.planets.length; j++) {
+        if (data.planets[j] === e.target.parentNode.children[0]) {
+            data.planets[j].add('hidden'); 
+        };
+    };    
+};  
+
+// DETERMINE WHICH PLANET IS CLICKED
+const clickPlanet = (e) => {
+    // 2. planets = Do GET to planets.json (XMLHttpRequest)
+    newApplication(e.target.getAttribute('src'));
+    // 1. Hide all planet dom element cards
+    hidePlanetCards();
+    // 3. planet = Figure out which planet the click came from?
+    // 4. planetCard2(planet)
 };
 
 // ON MOUSE-ENTER, SHOW PLANET IMAGE 
 const previewPlanet = (e) => {
     e.target.children[1].classList.remove('hidden');
-    e.target.children[0].classList.add('hidden');
-    clickPlanet(); 
+    e.target.children[0].classList.add('hidden'); 
 };
 
 // ADD EVENT-LISTENERS FOR MOUSE & CLICK EVENTS
@@ -78,26 +93,30 @@ const addEventListeners = () => {
     let planets = document.getElementsByClassName('original-card');
     for(let i = 0; i <planets.length; i++){
       planets[i].addEventListener('mouseenter', previewPlanet);
-  };
-}  
+      planets[i].addEventListener('click', clickPlanet);
+    };
+};  
 
-function executeThisCodeForBigCard(){
+// LOOP OVER DATA.PLANETS AND CALL PLANET2 
+function executeThisCodeForBigCard(planetId){
     const data = JSON.parse(this.responseText);
-    planetCard2(data.planets);
-}  
+        if (${planets.imageUrl} === e.target.getAttribute('src')) {
+        planetCard2(planet);
+    }    
+}        
 
-// XHR call for big card
-const newApplication = (e) => {
+// XHR CALL FOR BIG CARD
+const newApplication = (planetId) => {
     let myRequest = new XMLHttpRequest();
-    myRequest.addEventListener("load", executeThisCodeForBigCard);
+    myRequest.addEventListener("load", executeThisCodeForBigCard(planetId));
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
     myRequest.open("GET", "./planets.json");
     myRequest.send();
-}
+};
 
 function executeThisCodeAfterFileLoaded() {
     const data = JSON.parse(this.responseText);
-    planetCard(data.planets);
+    buildPlanetCards(data.planets);
 }
 
 function executeThisCodeIfXHRFails() {
@@ -118,5 +137,3 @@ const startApplication = () => {
 };
 
 startApplication();
-
-
