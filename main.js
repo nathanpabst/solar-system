@@ -60,6 +60,7 @@ const buildPlanetCards = (planetsArray) => {
         domString2 +=   `<p>${planet.description}</p>`;
         domString2 += `</div>`;
         printToDom(domString2, 'big-card');
+        xEventListener();
 };
 
 const hidePlanetCards = (e) => { 
@@ -90,6 +91,11 @@ const addEventListeners = () => {
       planets[i].addEventListener('click', clickPlanet);
     };
 };  
+
+const xEventListener = () => {
+    let closeButton = document.getElementById('close');
+    closeButton.addEventListener('click', startApplication);
+};
 
 // XHR CALL FOR BIG CARD
 const newApplication = (planetId) => {
