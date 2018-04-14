@@ -8,6 +8,11 @@ h1 {
     text-align: center;
 }
 
+#search {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* margin: 0 auto; */
+}
 #planet-holder {
     display: flex;
     flex-wrap: wrap;

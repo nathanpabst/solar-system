@@ -1,20 +1,10 @@
-// console.log('Oh, hey');
-// When the user clicks on a planet card all the cards dissapear and the only thing displayed on the page is information about the planet they clicked on. 
-
-// When the user clicks on the red X on a single planet that information goes away and all the original cards are displayed again.
-//   document.getElementById('close').addEventListener('click', startApplication);
-
 // When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
 // SEARCH BAR
-// domString +=    `<div class="col-lg-6">`;
-//     domString +=    `<div class="input-group">`;
-//     domString +=    `<input type="text" class="form-control" placeholder="Search for...">`;
-//     domString +=    `<span class="input-group-btn">`;
-//     domString +=    `<button class="btn btn-default" type="button">Go!</button>`;
-//     domString +=    `</span>`;
-//     domString +=    `</div>`;
 // GATHER INPUT FROM SEARCH BAR
 // const getUserInput = e.target.....value;
+// change toLowerCase
+// loop through planet.name and planet.description to find matches
+// show matches
 // CLEAR SEARCH BAR
 // const clearSearchBox = (input) => {
 //     input.value = "";
@@ -24,7 +14,7 @@ const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 };
 
-// BUILD INITIAL PLANET CARDS 
+// BUILD SMALL PLANET CARDS 
 const buildPlanetCards = (planetsArray) => {
     let domString = "";
     planetsArray.forEach((planet) => { 
@@ -37,7 +27,7 @@ const buildPlanetCards = (planetsArray) => {
     addEventListeners();
 };
 
-// BUILD PLANET CARD
+// BUILD BIG PLANET CARD
     const planetCard2 = (planet) => {
         let domString2 = "";
         domString2 += `<div class="exp-card">`;
