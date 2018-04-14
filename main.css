@@ -32,22 +32,28 @@ h1 {
     color: white;
     margin: 1%;
     padding: 2%;
-    width: 50%;
+    width: 70%;
+    height: 70%;
     border: 2px solid slategrey;
     background-color: skyblue;
     text-align: center;
+    font-size: 16px;
 
 }
 .exp-name {
-
+    font-size: 50px;
 }
 .exp-img {
-    width: 100px;
-    height: 100px;
+    width: 65%;
+    height: 65%;
+    border-radius: 5px 50px 5px;
     /* margin: 0 auto; */
 }
 #close {
     color: red;
+    position: absolute;
+    top: 185px;
+    right: 230px;
 }
 .image {
     width: 100%;
