@@ -1,10 +1,22 @@
 // When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
 // SEARCH BAR
 // GATHER INPUT FROM SEARCH BAR
-// const getUserInput = e.target.....value;
-// change toLowerCase
+const getUserInput = () => {
+    let input = document.getElementById('input').value;
+    // not getting anything from this console. what should i be logging? 
+    console.log(input);
+
+    let words = input.toLowerCase().split('');
+    // findSearchMatches();
+}
+// findSearchMatches = () => {
+// where does the info i need live? data.planets .. see executeThisCodeAfterFileLoaded function
 // loop through planet.name and planet.description to find matches
-// show matches
+// }
+
+// showSearchMatches = () => {
+// create new XHR that calls the buildPlanetCards function
+// }
 // CLEAR SEARCH BAR
 // const clearSearchBox = (input) => {
 //     input.value = "";
@@ -87,6 +99,11 @@ const xEventListener = () => {
     closeButton.addEventListener('click', startApplication);
 };
 
+const searchButtonEvent = () => {
+    let search = document.getElementById('search-btn');
+    search.addEventListener('click', getUserInput);
+}
+
 // XHR CALL FOR BIG CARD
 const newApplication = (planetId) => {
     let myRequest = new XMLHttpRequest();
@@ -105,6 +122,7 @@ const newApplication = (planetId) => {
 function executeThisCodeAfterFileLoaded() {
     const data = JSON.parse(this.responseText);
     buildPlanetCards(data.planets);
+    // findSearchMatches(data.planets);
 }
 
 function executeThisCodeIfXHRFails() {
