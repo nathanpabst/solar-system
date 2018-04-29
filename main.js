@@ -1,13 +1,21 @@
 // When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
 // SEARCH BAR
 // GATHER INPUT FROM SEARCH BAR
-const getUserInput = () => {
-    let input = document.getElementById('input').value;
-    // not getting anything from this console. what should i be logging? 
-    console.log(input);
+const getUserInput = (e) => {
+    let rawInput = document.getElementById('input').value;
+    document.getElementById('input').value = '';
+    // console.log(rawInput);
+    washInput(rawInput);
+};
 
-    let words = input.toLowerCase().split('');
-    // findSearchMatches();
+const washInput = (input) => {
+    input = input.replace(/[^A-Za-z/s]/g, "").toLowerCase();
+    let inputArray = input.split(" ");
+    // console.log(inputArray);
+    searchBarXHR(inputArray);
+
+        // findSearchMatches(words);
+
 }
 // findSearchMatches = () => {
 // where does the info i need live? data.planets .. see executeThisCodeAfterFileLoaded function
@@ -17,19 +25,15 @@ const getUserInput = () => {
 // showSearchMatches = () => {
 // create new XHR that calls the buildPlanetCards function
 // }
-// CLEAR SEARCH BAR
-// const clearSearchBox = (input) => {
-//     input.value = "";
-// }
 
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 };
 
 // BUILD SMALL PLANET CARDS 
-const buildPlanetCards = (planetsArray) => {
+const buildPlanetCards = (input) => {
     let domString = "";
-    planetsArray.forEach((planet) => { 
+    input.forEach((planet) => { 
         domString += `<div class="original-card">`;
         domString +=    `<h2 class="planet-name">${planet.name}</h2>`;
         domString +=    `<img class="hidden image" src="${planet.imageUrl}" alt="">`;
@@ -102,7 +106,37 @@ const xEventListener = () => {
 const searchButtonEvent = () => {
     let search = document.getElementById('search-btn');
     search.addEventListener('click', getUserInput);
+};
+
+function searchXHRsuccess() {
+    const data = JSON.parse(this.responseText);
+    buildPlanetCards(matches);
 }
+// XHR CALL FOR SEARCH TERMS
+const searchBarXHR = (input) => {
+    let myRequest = new XMLHttpRequest(); 
+    if (typeof(input) !== "object") {
+        myRequest.addEventListener('load', searchXHRsuccess);
+    } else {
+        myRequest.addEventListener('load', function() {
+            const data = JSON.parse(this.responseText);
+            let matches = [];
+            for (let i = 0; i < data.planets.length; i++) {
+                if (data.planets[i].name.toLowerCase().includes(input[0]) || data.planets[i].description.toLowerCase().includes(input[0])) {
+                    matches.push(data.planets[i]);
+                }
+            } if (matches.length > 0) {
+                buildPlanetCards(matches);
+            } else {
+                alert('No matches found');
+            }
+        })
+    }
+    myRequest.addEventListener("error", executeThisCodeIfXHRFails);
+    myRequest.open("GET", "./planets.json");
+    myRequest.send();
+};
+
 
 // XHR CALL FOR BIG CARD
 const newApplication = (planetId) => {
@@ -141,5 +175,5 @@ const startApplication = () => {
     // initiates the request
     myRequest.send();
 };
-
+searchButtonEvent();
 startApplication();
