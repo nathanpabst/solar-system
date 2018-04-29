@@ -140,7 +140,6 @@ const newApplication = (planetId) => {
 function executeThisCodeAfterFileLoaded() {
     const data = JSON.parse(this.responseText);
     buildPlanetCards(data.planets);
-    // findSearchMatches(data.planets);
 }
 
 function executeThisCodeIfXHRFails() {
