@@ -1,33 +1,18 @@
-// When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
+const printToDom = (domString, divId) => {
+    document.getElementById(divId).innerHTML = domString;
+};
+
 // SEARCH BAR
-// GATHER INPUT FROM SEARCH BAR
 const getUserInput = (e) => {
     let rawInput = document.getElementById('input').value;
     document.getElementById('input').value = '';
-    // console.log(rawInput);
     washInput(rawInput);
 };
 
 const washInput = (input) => {
     input = input.replace(/[^A-Za-z/s]/g, "").toLowerCase();
     let inputArray = input.split(" ");
-    // console.log(inputArray);
     searchBarXHR(inputArray);
-
-        // findSearchMatches(words);
-
-}
-// findSearchMatches = () => {
-// where does the info i need live? data.planets .. see executeThisCodeAfterFileLoaded function
-// loop through planet.name and planet.description to find matches
-// }
-
-// showSearchMatches = () => {
-// create new XHR that calls the buildPlanetCards function
-// }
-
-const printToDom = (domString, divId) => {
-    document.getElementById(divId).innerHTML = domString;
 };
 
 // BUILD SMALL PLANET CARDS 
@@ -136,7 +121,6 @@ const searchBarXHR = (input) => {
     myRequest.open("GET", "./planets.json");
     myRequest.send();
 };
-
 
 // XHR CALL FOR BIG CARD
 const newApplication = (planetId) => {
