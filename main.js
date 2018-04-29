@@ -1,33 +1,24 @@
-// console.log('Oh, hey');
-// When the user clicks on a planet card all the cards dissapear and the only thing displayed on the page is information about the planet they clicked on. 
-
-// When the user clicks on the red X on a single planet that information goes away and all the original cards are displayed again.
-//   document.getElementById('close').addEventListener('click', startApplication);
-
-// When the user types in the search bar, planet cards should only show up if they have what is typed in their name or description.
-// SEARCH BAR
-// domString +=    `<div class="col-lg-6">`;
-//     domString +=    `<div class="input-group">`;
-//     domString +=    `<input type="text" class="form-control" placeholder="Search for...">`;
-//     domString +=    `<span class="input-group-btn">`;
-//     domString +=    `<button class="btn btn-default" type="button">Go!</button>`;
-//     domString +=    `</span>`;
-//     domString +=    `</div>`;
-// GATHER INPUT FROM SEARCH BAR
-// const getUserInput = e.target.....value;
-// CLEAR SEARCH BAR
-// const clearSearchBox = (input) => {
-//     input.value = "";
-// }
-
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 };
 
-// BUILD INITIAL PLANET CARDS 
-const buildPlanetCards = (planetsArray) => {
+// SEARCH BAR
+const getUserInput = (e) => {
+    let rawInput = document.getElementById('input').value;
+    document.getElementById('input').value = '';
+    washInput(rawInput);
+};
+
+const washInput = (input) => {
+    input = input.replace(/[^A-Za-z/s]/g, "").toLowerCase();
+    let inputArray = input.split(" ");
+    searchBarXHR(inputArray);
+};
+
+// BUILD SMALL PLANET CARDS 
+const buildPlanetCards = (input) => {
     let domString = "";
-    planetsArray.forEach((planet) => { 
+    input.forEach((planet) => { 
         domString += `<div class="original-card">`;
         domString +=    `<h2 class="planet-name">${planet.name}</h2>`;
         domString +=    `<img class="hidden image" src="${planet.imageUrl}" alt="">`;
@@ -37,7 +28,7 @@ const buildPlanetCards = (planetsArray) => {
     addEventListeners();
 };
 
-// BUILD PLANET CARD
+// BUILD BIG PLANET CARD
     const planetCard2 = (planet) => {
         let domString2 = "";
         domString2 += `<div class="exp-card">`;
@@ -97,6 +88,40 @@ const xEventListener = () => {
     closeButton.addEventListener('click', startApplication);
 };
 
+const searchButtonEvent = () => {
+    let search = document.getElementById('search-btn');
+    search.addEventListener('click', getUserInput);
+};
+
+function searchXHRsuccess() {
+    const data = JSON.parse(this.responseText);
+    buildPlanetCards(matches);
+}
+// XHR CALL FOR SEARCH TERMS
+const searchBarXHR = (input) => {
+    let myRequest = new XMLHttpRequest(); 
+    if (typeof(input) !== "object") {
+        myRequest.addEventListener('load', searchXHRsuccess);
+    } else {
+        myRequest.addEventListener('load', function() {
+            const data = JSON.parse(this.responseText);
+            let matches = [];
+            for (let i = 0; i < data.planets.length; i++) {
+                if (data.planets[i].name.toLowerCase().includes(input[0]) || data.planets[i].description.toLowerCase().includes(input[0])) {
+                    matches.push(data.planets[i]);
+                }
+            } if (matches.length > 0) {
+                buildPlanetCards(matches);
+            } else {
+                alert('No matches found');
+            }
+        })
+    }
+    myRequest.addEventListener("error", executeThisCodeIfXHRFails);
+    myRequest.open("GET", "./planets.json");
+    myRequest.send();
+};
+
 // XHR CALL FOR BIG CARD
 const newApplication = (planetId) => {
     let myRequest = new XMLHttpRequest();
@@ -115,6 +140,7 @@ const newApplication = (planetId) => {
 function executeThisCodeAfterFileLoaded() {
     const data = JSON.parse(this.responseText);
     buildPlanetCards(data.planets);
+    // findSearchMatches(data.planets);
 }
 
 function executeThisCodeIfXHRFails() {
@@ -133,5 +159,5 @@ const startApplication = () => {
     // initiates the request
     myRequest.send();
 };
-
+searchButtonEvent();
 startApplication();
